@@ -52,12 +52,12 @@ kubectl auth can-i create  Deployment --as system:serviceaccount:app-team-var:ci
 ```
 
 
-Question 2: context: ek8s
+## Question 2: context: ek8s
 
-Set the node named workernode1.example.com as unavailable and reschedule all the pods running on it.
+## Set the node named workernode1.example.com as unavailable and reschedule all the pods running on it.
 
 
-Solution: In this question, it is asked indirectly to put this node on maintenance mode. 
+### Solution: In this question, it is asked indirectly to put this node on maintenance mode. 
 ### Change the context
 ```
 kubectl config use-context ek8s
@@ -88,21 +88,35 @@ kubectl drain workernode1.example.com --ignore-daemonsets --force
 kubectl get pods -o wide
 ```
 
-Question 3: First, create a snapshot of the existing etcd instance running at https://127.0.0.1:2379, saving the snapshot to /var/lib/etcd-snapshot.db.
-Next, restore an existing, previous snapshot located at /var/lib/etcd-snapshot-previous.db.
+## Question 3: First, create a snapshot of the existing etcd instance running at https://127.0.0.1:2379, saving the snapshot to /var/lib/etcd-snapshot.db.
+## Next, restore an existing, previous snapshot located at /var/lib/etcd-snapshot-previous.db.
 
-
-https://github.com/bmuschko/cka-crash-course/blob/master/exercises/04-etcd-backup-restore/solution/solution.md
-
-
+```
 kubectl -n kube-system get pod | grep etcd
+```
+```
 kubectl -n kube-system describe pod etcd-master1.example.com
 
-etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key snapshot save /opt/etcd-backup.db
+```
+```
+etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key snapshot save  /var/lib/etcd-snapshot.db
 
+```
+```
 ls -l /opt/etcd-backup.db
 
-How to restore from backup file (/var/lib/from-backup) ?
+```
+```
+sudo chown -R etcd:etcd  /var/lib/etcd-snapshot.db
+```
+
+```
+### How to restore from backup file (/var/lib/from-backup) ?
+
+```
+```
 etcdctl snapshot restore --data-dir /var/lib/from-backup  /opt/etcd-backup.db 
+
+```
 
 All explanation is being done on this video : https://youtu.be/0gkKak8ERQM
