@@ -134,9 +134,9 @@ kubectl get pod
 
 | Copy the below lines       | Remove these lines           |
 | -------------------------  | -----------------------------|
-| apiVersion: v1             |apiVersion: v1                |
-|kind: PersistentVolume      |kind: PersistentVolume        |
-|metadata:                   |metadata:                     |
+| apiVersion: v1             \|apiVersion: v1                |
+|kind: PersistentVolume      \|kind: PersistentVolume        |
+|metadata:                   \|metadata:                     |
 |  name: task-pv-volume      |  name: tata-pv               |
 |  labels:                   |  labels:                     |
 |    type: local             |    type: local               |
