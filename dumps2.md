@@ -154,19 +154,19 @@ spec:                     <br>
   hostPath:               <br>
     path: "/mnt/data"     </p></td>
 <td>
-apiVersion: v1                
-kind: PersistentVolume        
-metadata:                     
-  name: tata-pv               
-  labels:                     
-    type: local               
-spec:                         
-  storageClassName: manual    
-  capacity:                   
-    storage: 2Gi              
-  accessModes:                
-   - ReadWriteOnce            
-  hostPath:                   
-   path: "/srv/app-config-var"</td>
+<p>apiVersion: v1           <br>     
+kind: PersistentVolume     <br>   
+metadata:                   <br>  
+  name: tata-pv              <br> 
+  labels:                  <br>   
+    type: local            <br>   
+spec:                      <br>   
+  storageClassName: manual <br>   
+  capacity:               <br>    
+    storage: 2Gi           <br>   
+  accessModes:             <br>   
+   - ReadWriteOnce         <br>   
+  hostPath:                 <br>  
+   path: "/srv/app-config-var"</p></td>
 </tr>
 </table>	
