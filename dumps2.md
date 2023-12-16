@@ -33,7 +33,7 @@ font-family: Tahoma, Verdana, Arial, sans-serif; }
 [root@master1 ~]#
 ```
 ### If you want to understand in deep then you may watch my "What is service in Kubernetes" video on Youtube.
-[Link text](https://youtu.be/4AFLbbfr9UM)
+[What is service in Kubernete](https://youtu.be/4AFLbbfr9UM)
 
 ## Question 5: kubectl config use-context k8s-c1-H
 ## Scale the deployment web-server-var to 6 pods
@@ -347,4 +347,4 @@ bash-5.0# ls -ltr /tmp/tata-data
 total 0
 ```
 ### ### If you want to deep dive on Volume topic then you may watch my "What is Volume in Kubernetes" video on Youtube.
-[Link text](https://youtu.be/VIlrF9DoTIM)
+[What is Volume in Kubernetes](https://youtu.be/VIlrF9DoTIM)
