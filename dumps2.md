@@ -132,109 +132,39 @@ kubectl get pod
 
 ### Copy the below content
 
-<table class="jh-type-object jh-root">
-  <tbody class="">
-    <tr>
-      <th class="jh-key jh-object-key">apiVersion</th>
-      <td class="jh-value jh-object-value">
-        <span class="jh-type-string">v1</span>
-      </td>
-    </tr>
-    <tr>
-      <th class="jh-key jh-object-key">kind</th>
-      <td class="jh-value jh-object-value">
-        <span class="jh-type-string">PersistentVolume</span>
-      </td>
-    </tr>
-    <tr>
-      <th class="jh-key jh-object-key">metadata</th>
-      <td class="jh-value jh-object-value">
-        <table class="jh-type-object">
-          <tbody class="">
-            <tr>
-              <th class="jh-key jh-object-key">name</th>
-              <td class="jh-value jh-object-value">
-                <span class="jh-type-string">task-pv-volume</span>
-              </td>
-            </tr>
-            <tr>
-              <th class="jh-key jh-object-key">labels</th>
-              <td class="jh-value jh-object-value">
-                <table class="jh-type-object">
-                  <tbody class="">
-                    <tr>
-                      <th class="jh-key jh-object-key">type</th>
-                      <td class="jh-value jh-object-value">
-                        <span class="jh-type-string">local</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <th class="jh-key jh-object-key">spec</th>
-      <td class="jh-value jh-object-value">
-        <table class="jh-type-object">
-          <tbody class="">
-            <tr>
-              <th class="jh-key jh-object-key">storageClassName</th>
-              <td class="jh-value jh-object-value">
-                <span class="jh-type-string">manual</span>
-              </td>
-            </tr>
-            <tr>
-              <th class="jh-key jh-object-key">capacity</th>
-              <td class="jh-value jh-object-value">
-                <table class="jh-type-object">
-                  <tbody class="">
-                    <tr>
-                      <th class="jh-key jh-object-key">storage</th>
-                      <td class="jh-value jh-object-value">
-                        <span class="jh-type-string">10Gi</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <th class="jh-key jh-object-key">accessModes</th>
-              <td class="jh-value jh-object-value">
-                <table class="jh-type-array">
-                  <tbody class="">
-                    <tr>
-                      <th class="jh-key jh-array-key">0</th>
-                      <td class="jh-value jh-array-value">
-                        <span class="jh-type-string">ReadWriteOnce</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <th class="jh-key jh-object-key">hostPath</th>
-              <td class="jh-value jh-object-value">
-                <table class="jh-type-object">
-                  <tbody class="">
-                    <tr>
-                      <th class="jh-key jh-object-key">path</th>
-                      <td class="jh-value jh-object-value">
-                        <span class="jh-type-string">/mnt/data</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>edchart.com Yaml To HTML Converter</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>apiVersion</td>
+            <td>kind</td>
+            <td>metadata.name</td>
+            <td>metadata.labels.type</td>
+            <td>spec.storageClassName</td>
+            <td>spec.capacity.storage</td>
+            <td>spec.accessModes.0</td>
+            <td>spec.hostPath.path</td>
+        </tr>
+        <tr>
+            <td>v1</td>
+            <td>PersistentVolume</td>
+            <td>task-pv-volume</td>
+            <td>local</td>
+            <td>manual</td>
+            <td>10Gi</td>
+            <td>ReadWriteOnce</td>
+            <td>/mnt/data</td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+    </table>
+</body>
+
+</html>
