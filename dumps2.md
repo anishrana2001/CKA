@@ -132,20 +132,17 @@ kubectl get pod
 
 ### Copy the below content
 
-| Copy the below lines       | Remove these lines           |
-| -------------------------  | -----------------------------|
-| apiVersion: v1             \|apiVersion: v1                |
-|kind: PersistentVolume      \|kind: PersistentVolume        |
-|metadata:                   \|metadata:                     |
-|  name: task-pv-volume      |  name: tata-pv               |
-|  labels:                   |  labels:                     |
-|    type: local             |    type: local               |
-|spec:                       |spec:                         |
-|  storageClassName: manual  |  storageClassName: manual    |
-|  capacity:                 |  capacity:                   |
-|    storage: 10Gi           |    storage: 2Gi              |
-|  accessModes:              |  accessModes:                |
-|    - ReadWriteOnce         |   - ReadWriteOnce            |
-|  hostPath:                 |  hostPath:                   |
-|    path: "/mnt/data"       |   path: "/srv/app-config-var"|
-+---------------+---------------+--------------------+
+| apiVersion: v1             
+kind: PersistentVolume      
+metadata:                   
+  name: task-pv-volume      
+  labels:                   
+    type: local             
+spec:                       
+  storageClassName: manual  
+  capacity:                 
+    storage: 10Gi           
+  accessModes:              
+    - ReadWriteOnce         
+  hostPath:                 
+    path: "/mnt/data"       |
