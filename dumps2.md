@@ -139,20 +139,20 @@ kubectl get pod
 </tr>
 <tr>
 <td>
-apiVersion: v1            \
-kind: PersistentVolume    \
-metadata:                 \
-  name: task-pv-volume    \
-  labels:                 \
-    type: local           
-spec:                     
-  storageClassName: manual
-  capacity:               
-    storage: 10Gi         
-  accessModes:            
-    - ReadWriteOnce       
-  hostPath:               
-    path: "/mnt/data"     </td>
+<p>apiVersion: v1  <br>       
+kind: PersistentVolume   <br>
+metadata:                 <br>
+  name: task-pv-volume    <br>
+  labels:                <br> 
+    type: local           <br>
+spec:                     <br>
+  storageClassName: manual<br>
+  capacity:              <br> 
+    storage: 10Gi        <br> 
+  accessModes:            <br>
+    - ReadWriteOnce       <br>
+  hostPath:               <br>
+    path: "/mnt/data"     </p></td>
 <td>
 apiVersion: v1                
 kind: PersistentVolume        
@@ -169,4 +169,4 @@ spec:
   hostPath:                   
    path: "/srv/app-config-var"</td>
 </tr>
-</table>
+</table>	
