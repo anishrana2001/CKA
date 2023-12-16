@@ -138,8 +138,35 @@ kubectl get pod
 <th>Description</th>
 </tr>
 <tr>
-<td>appDir</td>
-<td>The top level directory that contains your app. If this option is used then
-it assumed your scripts are in</td>
+<td>
+apiVersion: v1            
+kind: PersistentVolume    
+metadata:                 
+  name: task-pv-volume    
+  labels:                 
+    type: local           
+spec:                     
+  storageClassName: manual
+  capacity:               
+    storage: 10Gi         
+  accessModes:            
+    - ReadWriteOnce       
+  hostPath:               
+    path: "/mnt/data"     </td>
+<td>
+apiVersion: v1                
+kind: PersistentVolume        
+metadata:                     
+  name: tata-pv               
+  labels:                     
+    type: local               
+spec:                         
+  storageClassName: manual    
+  capacity:                   
+    storage: 2Gi              
+  accessModes:                
+   - ReadWriteOnce            
+  hostPath:                   
+   path: "/srv/app-config-var"</td>
 </tr>
-</table>	
+</table>
