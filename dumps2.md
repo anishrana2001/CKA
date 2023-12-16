@@ -5,7 +5,7 @@
 
 
 ### Solution: 
-### What we have deployment name "front-end-var".
+### What we have, deployment name "front-end-var", whcih is already running.
 ### What is asked us, expose this deployment on port 80, protocol TCP. 
 ### Then, ask to bind the NodePort service "front-end-var-svc-var" to this deployment. 
 
@@ -32,7 +32,8 @@ font-family: Tahoma, Verdana, Arial, sans-serif; }
 </head>
 [root@master1 ~]#
 ```
-
+### If you want to understand in deep then you may watch my "What is service in Kubernetes" video on Youtube.
+[Link text](https://youtu.be/4AFLbbfr9UM)
 
 ## Question 5: kubectl config use-context k8s-c1-H
 ## Scale the deployment web-server-var to 6 pods
@@ -313,18 +314,21 @@ kubectl apply -f  question7-pvc.yaml
 kubectl apply -f  question7-pod.yaml
 ```
 
+### If everything is OK, then our pod must be in running state.
 ```
 [root@master1 ~]# kubectl -n project-tiger get pods
 NAME   READY   STATUS    RESTARTS   AGE
 tata   1/1     Running   0          50s
- 
+```
+### We can also check if directory is correctly mounted on our POD
+```
 [root@master1 ~]# kubectl -n project-tiger exec -it tata -- /bin/bash
 
 bash-5.0# df -h
 Filesystem                Size      Used Available Use% Mounted on
 overlay                  14.0G      8.3G      5.6G  60% /
 tmpfs                    64.0M         0     64.0M   0% /dev
-/dev/sda2                14.0G      8.3G      5.6G  60% /tmp/tata-data
+/dev/sda2                14.0G      8.3G      5.6G  60% /tmp/tata-data  >>>>>>
 /dev/sda2                14.0G      8.3G      5.6G  60% /etc/hosts
 /dev/sda2                14.0G      8.3G      5.6G  60% /dev/termination-log
 /dev/sda2                14.0G      8.3G      5.6G  60% /etc/hostname
@@ -342,4 +346,5 @@ bash-5.0#
 bash-5.0# ls -ltr /tmp/tata-data
 total 0
 ```
-
+### ### If you want to deep dive on Volume topic then you may watch my "What is Volume in Kubernetes" video on Youtube.
+[Link text](https://youtu.be/VIlrF9DoTIM)
