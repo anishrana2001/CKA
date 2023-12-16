@@ -93,3 +93,59 @@ kubectl create -f 4.pod.yaml
 ```
 kubectl get pod
 ```
+
+
+## Question 7: use context : k8s-c1-H 
+
+##  - Create a new PersistentVolume named tata-pv. It should have a capacity of 2Gi, accessMode ReadWriteOnce, hostPath /srv/app-config-var.
+##  - Next create a new PersistentVolumeClaim in Namespace project-tiger named tata-pvc . It should request 2Gi storage, accessMode ReadWriteOnce and should not define a storageClassName. The PVC should bound to the PV correctly.
+##  - Finally create a new pod tata in Namespace project-tiger which mounts that volume at /tmp/tata-data. The Pods should be of image httpd:2.4.41-alpine.
+
+### Solution: In exam, namespace "project-tige" already created. 
+### To complete this question, we need to create PV, PVC and POD.
+### 1. Create PV:  
+### name=tata-pv,  
+### Capacity=2Gi, 
+### accessMode=ReadWriteOnce, 
+### hostPath=/srv/app-config-var , 
+### Remember: PV is not namespaced object.
+ 
+### 2. Create PVC: 
+### name=tata-pvc, 
+### Capacity=2Gi,
+### accessMode=ReadWriteOnce, 
+### Namespace=project-tiger, 
+### should not define a storageClassName.
+ 
+### 3. Create POD: 
+### name=tata, 
+### namespace=project-tiger, 
+### volume=/tmp/tata-data, 
+### image=httpd:2.4.41-alpine
+
+
+### 1. Create PV:  name=tata-pv,  Capacity=2Gi, accessMode=ReadWriteOnce, hostPath=/srv/app-config-var , Remember: PV is not namespaced object.
+ 
+### Open kubernetes.io => Documentation => Search "pv hostPath"
+
+### Copy content like below from the website.
+
+### Copy the below content
+
+| Copy the below lines       | Remove these lines           |
+| -------------------------  | -----------------------------|
+| apiVersion: v1             |apiVersion: v1                |
+|kind: PersistentVolume      |kind: PersistentVolume        |
+|metadata:                   |metadata:                     |
+|  name: task-pv-volume      |  name: tata-pv               |
+|  labels:                   |  labels:                     |
+|    type: local             |    type: local               |
+|spec:                       |spec:                         |
+|  storageClassName: manual  |  storageClassName: manual    |
+|  capacity:                 |  capacity:                   |
+|    storage: 10Gi           |    storage: 2Gi              |
+|  accessModes:              |  accessModes:                |
+|    - ReadWriteOnce         |   - ReadWriteOnce            |
+|  hostPath:                 |  hostPath:                   |
+|    path: "/mnt/data"       |   path: "/srv/app-config-var"|
+-------------------------------------------------------------
