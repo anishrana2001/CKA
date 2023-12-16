@@ -148,21 +148,4 @@ kubectl get pod
 |    - ReadWriteOnce         |   - ReadWriteOnce            |
 |  hostPath:                 |  hostPath:                   |
 |    path: "/mnt/data"       |   path: "/srv/app-config-var"|
--------------------------------------------------------------
-
-| Copy the below lines       |
-------------------------------
-| apiVersion: v1             
-kind: PersistentVolume      
-metadata:                   
-  name: task-pv-volume      
-  labels:                   
-    type: local             
-spec:                       
-  storageClassName: manual  
-  capacity:                 
-    storage: 10Gi           
-  accessModes:              
-    - ReadWriteOnce         
-  hostPath:                 
-    path: "/mnt/data"       |
++---------------+---------------+--------------------+
