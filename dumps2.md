@@ -126,45 +126,218 @@ kubectl get pod
 
 ### 1. Create PV:  name=tata-pv,  Capacity=2Gi, accessMode=ReadWriteOnce, hostPath=/srv/app-config-var , Remember: PV is not namespaced object.
  
-### Open kubernetes.io => Documentation => Search "pv hostPath"
+### Open kubernetes.io => Documentation => Search "pv hostPath". Open the first link and scron down.
 
 ### Copy content like below from the website.
 
 ### Copy the below content
 
-<!DOCTYPE html>
-<html>
+```yaml
+apiVersion: v1            
+kind: PersistentVolume    
+metadata:                 
+  name: task-pv-volume    
+  labels:                 
+    type: local           
+spec:                     
+  storageClassName: manual
+  capacity:               
+    storage: 10Gi         
+  accessModes:            
+    - ReadWriteOnce       
+  hostPath:               
+    path: "/mnt/data"     
+```
 
-<head>
-    <title>edchart.com Yaml To HTML Converter</title>
-</head>
+### Modify the content as per our question, like below
 
-<body>
-    <table>
-        <tr>
-            <td>apiVersion</td>
-            <td>kind</td>
-            <td>metadata.name</td>
-            <td>metadata.labels.type</td>
-            <td>spec.storageClassName</td>
-            <td>spec.capacity.storage</td>
-            <td>spec.accessModes.0</td>
-            <td>spec.hostPath.path</td>
-        </tr>
-        <tr>
-            <td>v1</td>
-            <td>PersistentVolume</td>
-            <td>task-pv-volume</td>
-            <td>local</td>
-            <td>manual</td>
-            <td>10Gi</td>
-            <td>ReadWriteOnce</td>
-            <td>/mnt/data</td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-    </table>
-</body>
+```
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: tata-pv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/srv/app-config-var"
+```
+### create one new file and paste the above yaml file, like below.
+```
+cat <<EOF>> question7-pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: tata-pv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/srv/app-config-var"
+EOF
+```
 
-</html>
+### 2. Create PVC: name=tata-pvc, Capacity=2Gi, accessMode=ReadWriteOnce, Namespace=project-tiger, should not define a storageClassName.
+ 
+### Open the kubernetes.io => Documentation => Search "pvc accessModes"
+###  Open the first link and Copy the below content
+
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: restore-pvc
+spec:
+  storageClassName: csi-hostpath-sc
+  dataSource:
+    name: new-snapshot-test
+    kind: VolumeSnapshot
+    apiGroup: snapshot.storage.k8s.io
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+```
+### Modify the content as per our question, like below
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tata-pvc
+  namespace: project-tiger
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+```
+
+### create one new file and paste the above yaml file, like below.
+```
+cat <<EOF>> question7-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tata-pvc
+  namespace: project-tiger
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+EOF
+```
+
+### 3. Create pod: name=tata, namespace=project-tiger, volume=/tmp/tata-data, image=httpd:2.4.41-alpine
+ 
+###  kubernetes.io => Documentation => Search "pod pvc"
+ 
+ 
+
+### Copy the below content
+	
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: task-pv-pod
+spec:
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: task-pv-claim
+  containers:
+    - name: task-pv-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: task-pv-storage
+```
+
+### Modify the content as per our question, like below
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tata
+  namespace: project-tiger
+spec:
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: tata-pvc
+  containers:
+    - name: task-pv-container
+      image: httpd:2.4.41-alpine
+      volumeMounts:
+        - mountPath: "/tmp/tata-data"
+          name: data
+```
+
+### create one new file and paste the above yaml file, like below.
+```
+cat <<EOF>> question7-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tata
+  namespace: project-tiger
+spec:
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: tata-pvc
+  containers:
+    - name: task-pv-container
+      image: httpd:2.4.41-alpine
+      volumeMounts:
+        - mountPath: "/tmp/tata-data"
+          name: data
+EOF
+```
+### Now, its time to create PV, PVC and POD from the yaml files.
+```
+kubectl apply -f  question7-pv.yaml
+kubectl apply -f  question7-pvc.yaml
+kubectl apply -f  question7-pod.yaml
+```
+#### 
+#### [root@master1 ~]# kubectl -n project-tiger get pods
+#### NAME   READY   STATUS    RESTARTS   AGE
+#### tata   1/1     Running   0          50s
+ 
+#### [root@master1 ~]# kubectl -n project-tiger exec -it tata -- /bin/bash
+
+#### bash-5.0# df -h
+#### Filesystem                Size      Used Available Use% Mounted on
+#### overlay                  14.0G      8.3G      5.6G  60% /
+#### tmpfs                    64.0M         0     64.0M   0% /dev
+#### /dev/sda2                14.0G      8.3G      5.6G  60% /tmp/tata-data
+#### /dev/sda2                14.0G      8.3G      5.6G  60% /etc/hosts
+#### /dev/sda2                14.0G      8.3G      5.6G  60% /dev/termination-log
+#### /dev/sda2                14.0G      8.3G      5.6G  60% /etc/hostname
+#### /dev/sda2                14.0G      8.3G      5.6G  60% /etc/resolv.conf
+#### shm                      64.0M         0     64.0M   0% /dev/shm
+#### tmpfs                     2.1G     12.0K      2.1G   0% /run/secrets/kubernetes.io/serviceaccount
+#### tmpfs                     1.1G         0      1.1G   0% /proc/acpi
+#### tmpfs                    64.0M         0     64.0M   0% /proc/kcore
+#### tmpfs                    64.0M         0     64.0M   0% /proc/keys
+#### tmpfs                    64.0M         0     64.0M   0% /proc/timer_list
+#### tmpfs                     1.1G         0      1.1G   0% /proc/scsi
+#### tmpfs                     1.1G         0      1.1G   0% /sys/firmware
+#### bash-5.0#
+#### 
+#### bash-5.0# ls -ltr /tmp/tata-data
+#### total 0
+ 
