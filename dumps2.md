@@ -139,11 +139,11 @@ kubectl get pod
 </tr>
 <tr>
 <td>
-apiVersion: v1            
-kind: PersistentVolume    
-metadata:                 
-  name: task-pv-volume    
-  labels:                 
+apiVersion: v1            \
+kind: PersistentVolume    \
+metadata:                 \
+  name: task-pv-volume    \
+  labels:                 \
     type: local           
 spec:                     
   storageClassName: manual
