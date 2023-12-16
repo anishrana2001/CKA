@@ -133,41 +133,124 @@ kubectl get pod
 ### Copy the below content
 
 <table>
-<tr>
-<th>Argument</th>
-<th>Description</th>
-</tr>
-<tr>
-<td>
-<p>apiVersion: v1  <br>       
-kind: PersistentVolume   <br>
-metadata:                 <br>
-&nbsp;&nbsp;  name: task-pv-volume    <br>
-&nbsp;&nbsp;  labels:                <br> 
-&nbsp;&nbsp;&nbsp;    type: local           <br>
-spec:                     <br>
-&nbsp;&nbsp;  storageClassName: manual<br>
-&nbsp;&nbsp;  capacity:              <br> 
-&nbsp;&nbsp;&nbsp;    storage: 10Gi        <br> 
-&nbsp;&nbsp;  accessModes:            <br>
-&nbsp; &nbsp;&nbsp;   - ReadWriteOnce       <br>
-&nbsp;&nbsp;  hostPath:               <br>
-&nbsp;&nbsp;&nbsp;    path: "/mnt/data"     </p></td>
-<td>
-<p>apiVersion: v1           <br>     
-kind: PersistentVolume     <br>   
-metadata:                   <br>  
-  name: tata-pv              <br> 
-  labels:                  <br>   
-    type: local            <br>   
-spec:                      <br>   
-  storageClassName: manual <br>   
-  capacity:               <br>    
-    storage: 2Gi           <br>   
-  accessModes:             <br>   
-   - ReadWriteOnce         <br>   
-  hostPath:                 <br>  
-   path: "/srv/app-config-var"</p></td>
-</tr>
-</table>	
-
+    <tr>
+        <td>apiVersion: v1            </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>kind: PersistentVolume    </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>metadata:                 </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>  name: task-pv-volume    </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>  labels:                 </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>    type: local           </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>spec:                     </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>  storageClassName: manual</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>  capacity:               </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>    storage: 10Gi         </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
