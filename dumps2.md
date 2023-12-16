@@ -151,7 +151,7 @@ spec:
 
 ### Modify the content as per our question, like below
 
-```
+```yaml
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -186,7 +186,7 @@ EOF
 ### Open the kubernetes.io => Documentation => Search "pvc accessModes"
 ###  Open the first link and Copy the below content
 
-```
+```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -204,7 +204,7 @@ spec:
       storage: 10Gi
 ```
 ### Modify the content as per our question, like below
-```
+```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -244,7 +244,7 @@ EOF
 ### Copy the below content
 	
 
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -266,7 +266,7 @@ spec:
 ```
 
 ### Modify the content as per our question, like below
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -312,32 +312,34 @@ kubectl apply -f  question7-pv.yaml
 kubectl apply -f  question7-pvc.yaml
 kubectl apply -f  question7-pod.yaml
 ```
-#### 
-#### [root@master1 ~]# kubectl -n project-tiger get pods
-#### NAME   READY   STATUS    RESTARTS   AGE
-#### tata   1/1     Running   0          50s
- 
-#### [root@master1 ~]# kubectl -n project-tiger exec -it tata -- /bin/bash
 
-#### bash-5.0# df -h
-#### Filesystem                Size      Used Available Use% Mounted on
-#### overlay                  14.0G      8.3G      5.6G  60% /
-#### tmpfs                    64.0M         0     64.0M   0% /dev
-#### /dev/sda2                14.0G      8.3G      5.6G  60% /tmp/tata-data
-#### /dev/sda2                14.0G      8.3G      5.6G  60% /etc/hosts
-#### /dev/sda2                14.0G      8.3G      5.6G  60% /dev/termination-log
-#### /dev/sda2                14.0G      8.3G      5.6G  60% /etc/hostname
-#### /dev/sda2                14.0G      8.3G      5.6G  60% /etc/resolv.conf
-#### shm                      64.0M         0     64.0M   0% /dev/shm
-#### tmpfs                     2.1G     12.0K      2.1G   0% /run/secrets/kubernetes.io/serviceaccount
-#### tmpfs                     1.1G         0      1.1G   0% /proc/acpi
-#### tmpfs                    64.0M         0     64.0M   0% /proc/kcore
-#### tmpfs                    64.0M         0     64.0M   0% /proc/keys
-#### tmpfs                    64.0M         0     64.0M   0% /proc/timer_list
-#### tmpfs                     1.1G         0      1.1G   0% /proc/scsi
-#### tmpfs                     1.1G         0      1.1G   0% /sys/firmware
-#### bash-5.0#
-#### 
-#### bash-5.0# ls -ltr /tmp/tata-data
-#### total 0
+```
+[root@master1 ~]# kubectl -n project-tiger get pods
+NAME   READY   STATUS    RESTARTS   AGE
+tata   1/1     Running   0          50s
  
+[root@master1 ~]# kubectl -n project-tiger exec -it tata -- /bin/bash
+
+bash-5.0# df -h
+Filesystem                Size      Used Available Use% Mounted on
+overlay                  14.0G      8.3G      5.6G  60% /
+tmpfs                    64.0M         0     64.0M   0% /dev
+/dev/sda2                14.0G      8.3G      5.6G  60% /tmp/tata-data
+/dev/sda2                14.0G      8.3G      5.6G  60% /etc/hosts
+/dev/sda2                14.0G      8.3G      5.6G  60% /dev/termination-log
+/dev/sda2                14.0G      8.3G      5.6G  60% /etc/hostname
+/dev/sda2                14.0G      8.3G      5.6G  60% /etc/resolv.conf
+shm                      64.0M         0     64.0M   0% /dev/shm
+tmpfs                     2.1G     12.0K      2.1G   0% /run/secrets/kubernetes.io/serviceaccount
+tmpfs                     1.1G         0      1.1G   0% /proc/acpi
+tmpfs                    64.0M         0     64.0M   0% /proc/kcore
+tmpfs                    64.0M         0     64.0M   0% /proc/keys
+tmpfs                    64.0M         0     64.0M   0% /proc/timer_list
+tmpfs                     1.1G         0      1.1G   0% /proc/scsi
+tmpfs                     1.1G         0      1.1G   0% /sys/firmware
+bash-5.0#
+ 
+bash-5.0# ls -ltr /tmp/tata-data
+total 0
+```
+
