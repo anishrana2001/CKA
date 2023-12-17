@@ -354,6 +354,7 @@ total 0
 ## Question 8: Create a persistent volume with name app-motor, of capacity 2Gi and access mode ReadWriteMany. The type of volume is hostPath location is /srv/app-tata
 
 ### Solution: kubectl config use-context ek8s
+### In this question, it is asked us to create only PV, thus we will only create PV.
 ### Open URL : https://kubernetes.io --> Documentation --> Search => PV Accessmode ==> Open frist link and search for "accessmode"
 ### Copy the content link below:
 
