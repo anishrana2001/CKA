@@ -348,3 +348,97 @@ total 0
 ```
 ### ### If you want to deep dive on Volume topic then you may watch my "What is Volume in Kubernetes" video on Youtube.
 [What is Volume in Kubernetes](https://youtu.be/VIlrF9DoTIM)
+
+
+
+## Question 8: Create a persistent volume with name app-motor, of capacity 2Gi and access mode ReadWriteMany. The type of volume is hostPath location is /srv/app-tata
+
+### Solution: kubectl config use-context ek8s
+### Open URL : https://kubernetes.io --> Documentation --> Search => PV Accessmode ==> Open frist link and search for "accessmode"
+### Copy the content link below:
+
+```
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv0003
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: slow
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:
+    path: /tmp
+    server: 172.17.0.2
+```
+
+### Now, modify the yaml file as per the question
+```yaml
+cat <<EOF>> question8-pv.yaml 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: app-motor
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/srv/app-tata"
+EOF
+```
+
+```
+kubectl apply -f question8-pv.yaml 
+```
+### [root@master1 ~]# kubectl apply -f question8-pv.yaml 
+### persistentvolume/app-motor created
+
+
+```
+kubectl get pv/app-motor 
+```
+
+#### [root@master1 ~]# kubectl get pv/app-motor 
+#### NAME        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+#### app-motor   2Gi        RWX            Retain           Available           manual                  14m
+
+```
+kubectl describe pv/app-motor 
+```
+#### [root@master1 ~]# kubectl describe pv/app-motor 
+#### Name:            app-motor
+#### Labels:          type=local
+#### Annotations:     <none>
+#### Finalizers:      [kubernetes.io/pv-protection]
+#### StorageClass:    manual
+#### Status:          Available
+#### Claim:           
+#### Reclaim Policy:  Retain
+#### Access Modes:    RWX
+#### VolumeMode:      Filesystem
+#### Capacity:        2Gi
+#### Node Affinity:   <none>
+#### Message:         
+#### Source:
+####     Type:          HostPath (bare host directory volume)
+####     Path:          /srv/app-tata
+####     HostPathType:  
+#### Events:            <none>
+#### [root@master1 ~]# 
+
+
+
+## If you want to learn hostPath volume then you may watch my Youtube video.
+[What is hostPath Volume in Kubernetes](https://youtu.be/oRDBzoorybI)
+
