@@ -416,26 +416,29 @@ kubectl get pv/app-motor
 ```
 kubectl describe pv/app-motor 
 ```
-#### [root@master1 ~]# kubectl describe pv/app-motor 
-#### Name:            app-motor
-#### Labels:          type=local
-#### Annotations:     <none>
-#### Finalizers:      [kubernetes.io/pv-protection]
-#### StorageClass:    manual
-#### Status:          Available
-#### Claim:           
-#### Reclaim Policy:  Retain
-#### Access Modes:    RWX
-#### VolumeMode:      Filesystem
-#### Capacity:        2Gi
-#### Node Affinity:   <none>
-#### Message:         
-#### Source:
-####     Type:          HostPath (bare host directory volume)
-####     Path:          /srv/app-tata
-####     HostPathType:  
-#### Events:            <none>
-#### [root@master1 ~]# 
+```
+For the reference purpose:
+[root@master1 ~]# kubectl describe pv/app-motor 
+Name:            app-motor
+Labels:          type=local
+Annotations:     <none>
+Finalizers:      [kubernetes.io/pv-protection]
+StorageClass:    manual
+Status:          Available
+Claim:           
+Reclaim Policy:  Retain
+Access Modes:    RWX
+VolumeMode:      Filesystem
+Capacity:        2Gi
+Node Affinity:   <none>
+Message:         
+Source:
+    Type:          HostPath (bare host directory volume)
+    Path:          /srv/app-tata
+    HostPathType:  
+Events:            <none>
+[root@master1 ~]# 
+```
 
 
 
