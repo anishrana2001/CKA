@@ -401,23 +401,27 @@ EOF
 ```
 kubectl apply -f question8-pv.yaml 
 ```
-### [root@master1 ~]# kubectl apply -f question8-pv.yaml 
-### persistentvolume/app-motor created
 
+### For Reference purpose 
+```
+[root@master1 ~]# kubectl apply -f question8-pv.yaml 
+persistentvolume/app-motor created
+```
 
 ```
 kubectl get pv/app-motor 
 ```
-
-#### [root@master1 ~]# kubectl get pv/app-motor 
-#### NAME        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
-#### app-motor   2Gi        RWX            Retain           Available           manual                  14m
-
+### For Reference purpose 
+```
+[root@master1 ~]# kubectl get pv/app-motor 
+NAME        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+app-motor   2Gi        RWX            Retain           Available           manual                  14m
+```
 ```
 kubectl describe pv/app-motor 
 ```
+### For Reference purpose 
 ```
-For the reference purpose:
 [root@master1 ~]# kubectl describe pv/app-motor 
 Name:            app-motor
 Labels:          type=local
