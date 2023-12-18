@@ -42,7 +42,7 @@ kubectl create rolebinding deploy-b --clusterrole=deployment-clusterrole-var --s
 
 ```
 ```
-kubectl describe clusterrolebindings.rbac.authorization.k8s.io/deploy-b
+kubectl describe rolebindings.rbac.authorization.k8s.io/deploy-b
 
 ```
 ```
