@@ -36,9 +36,9 @@ kubectl create clusterrole deployment-clusterrole-var --verb=create --resource=D
 kubectl create serviceaccount cicd-token-var -n app-team-var
 
 ```
-### We have created clusterrole and serviceaccount, and now, we can create rolebinding. Please note the serviceaccount syntax "--serviceaccount=namespace:serviceaccount-name"
+### We have created clusterrole and serviceaccount, and now, we can create rolebinding. Please note the serviceaccount syntax "--serviceaccount=namespace:serviceaccount-name" and don't forget to add namespace
 ```
-kubectl create rolebinding deploy-b --clusterrole=deployment-clusterrole-var --serviceaccount=app-team-var:cici-token
+kubectl create rolebinding deploy-b --clusterrole=deployment-clusterrole-var --serviceaccount=app-team-var:cici-token --namespace=app-team-var
 
 ```
 ```
@@ -50,7 +50,7 @@ kubectl describe clusterrole deployment-clusterrole-var
 
 ```
 ```
-kubectl auth can-i create  Deployment --as system:serviceaccount:app-team-var:cicd-token-var --namespace=app-team-var
+kubectl auth can-i create  Deployment --as system:serviceaccount:app-team-var:cici-token --namespace=app-team-var
 
 ```
 
