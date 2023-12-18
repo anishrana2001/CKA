@@ -54,6 +54,36 @@ kubectl auth can-i create  Deployment --as system:serviceaccount:app-team-var:ci
 
 ```
 
+### For your references:
+```
+
+[root@master1 ~]# 
+[root@master1 ~]# kubectl describe clusterrole deployment-clusterrole-var
+Name:         deployment-clusterrole-var
+Labels:       <none>
+Annotations:  <none>
+PolicyRule:
+  Resources          Non-Resource URLs  Resource Names  Verbs
+  ---------          -----------------  --------------  -----
+  daemonsets.apps    []                 []              [create]
+  deployments.apps   []                 []              [create]
+  statefulsets.apps  []                 []              [create]
+[root@master1 ~]# kubectl -n app-team-var describe rolebindings.rbac.authorization.k8s.io deploy-b 
+Name:         deploy-b
+Labels:       <none>
+Annotations:  <none>
+Role:
+  Kind:  ClusterRole
+  Name:  deployment-clusterrole-var
+Subjects:
+  Kind            Name        Namespace
+  ----            ----        ---------
+  ServiceAccount  cici-token  app-team-var
+[root@master1 ~]# 
+
+[root@master1 ~]# kubectl auth can-i create  Deployment --as system:serviceaccount:app-team-var:cici-token --namespace=app-team-var
+yes
+```
 
 ## Question 2: context: ek8s
 
