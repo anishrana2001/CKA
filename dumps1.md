@@ -16,8 +16,11 @@
 ## ClusterRole = deployment-clusterrole-var
 ## ServiceAccount = cicd-token-var
 ## namespace = app-team-var
-## What we need to create, clusterrole,serviceaccount, and clusterroleBinding.
+## What we need to create, clusterrole,serviceaccount, and roleBinding.
 ## Detailed information is being shared on this video : https://youtu.be/_MmrGe1_l3c
+##  Remember : ClusterRole and clusterrolebinding are not a namespaced object.
+## But in question it is asked us "Bind new ClusterRole "deployment-clusterrole-var" to the new ServiceAccount cicd-token-var, limited to the namespace app-team-var."
+## It means that we need to create a ClusterRole and bind this ClusterRole with Rolebinding because rolebinding is a namespaced object.
 
 ### Change the context
 ```
@@ -33,9 +36,9 @@ kubectl create clusterrole deployment-clusterrole-var --verb=create --resource=D
 kubectl create serviceaccount cicd-token-var -n app-team-var
 
 ```
-### Now, we have clusterrole and serviceaccount, we can create clusterrolebinding. Please note the serviceaccount syntax "--serviceaccount=namespace:serviceaccount-name"
+### We have created clusterrole and serviceaccount, and now, we can create rolebinding. Please note the serviceaccount syntax "--serviceaccount=namespace:serviceaccount-name"
 ```
-kubectl create clusterrolebinding deploy-b --clusterrole=deployment-clusterrole-var --serviceaccount=app-team-var:cici-token
+kubectl create rolebinding deploy-b --clusterrole=deployment-clusterrole-var --serviceaccount=app-team-var:cici-token
 
 ```
 ```
