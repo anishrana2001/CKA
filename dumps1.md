@@ -13,14 +13,14 @@
 ## Bind the new ClusterRole deployment-clusterrole-var to the new ServiceAccount cicd-token-var, limited to the namespace app-team-var.
 
 ## Solution: What we have given in the question
-## ClusterRole = deployment-clusterrole-var
-## ServiceAccount = cicd-token-var
-## namespace = app-team-var
-## What we need to create, clusterrole,serviceaccount, and roleBinding.
-## Detailed information is being shared on this video : https://youtu.be/_MmrGe1_l3c
-##  Remember : ClusterRole and clusterrolebinding are not a namespaced object.
-## But in question it is asked us "Bind new ClusterRole "deployment-clusterrole-var" to the new ServiceAccount cicd-token-var, limited to the namespace app-team-var."
-## It means that we need to create a ClusterRole and bind this ClusterRole with Rolebinding because rolebinding is a namespaced object.
+### ClusterRole = deployment-clusterrole-var
+### ServiceAccount = cicd-token-var
+### namespace = app-team-var
+### What we need to create, clusterrole,serviceaccount, and roleBinding.
+### Detailed information is being shared on this video : https://youtu.be/_MmrGe1_l3c
+###  Remember : ClusterRole and clusterrolebinding are not a namespaced object.
+### But in question it is asked us "Bind new ClusterRole "deployment-clusterrole-var" to the new ServiceAccount cicd-token-var, limited to the namespace app-team-var."
+### It means that we need to create a ClusterRole and bind this ClusterRole with Rolebinding because rolebinding is a namespaced object.
 
 ### Change the context
 ```
