@@ -11,7 +11,7 @@
 ##
 ##
 ##
-### 1. Understand deployments and how to perform rolling update and rollbacks
+## 1. Understand deployments and how to perform rolling update and rollbacks
      
 ### Question: Create a new deployment called web-prod-268, with image nginx:1.16 and 1 replica. Next upgrade the deployment to version 1.17 using rolling update.
 ### Make sure that the version upgrade is recorded in the resource annotation. 
