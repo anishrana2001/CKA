@@ -210,14 +210,16 @@ kubectl -n project-lab scale statefulset oodb --replicas=1
 statefulset.apps/oodb scaled
 ```
 
-### Post checks / How to verify it?
+### Post checks / How to verify it? From the output, pod must be 1
 
 ```
 kubectl get deployments.apps,statefulsets.apps,ds -n project-lab 
 ```
 ### For reference purpose only.
+```
 [root@master1 ~]# kubectl get deployments.apps,statefulsets.apps,ds -n project-lab 
 NAME                    READY   AGE
 statefulset.apps/oodb   1/1     3m46s
 [root@master1 ~]# 
+```
 ### Congratulation!! You have completed the question successfully.
