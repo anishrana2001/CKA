@@ -87,7 +87,7 @@ kubectl describe deployments.apps web-prod-268 | grep -i "Image:"
 ### Congratulation!! You have completed the question successfully.
 
 
-### 3. Know how to scale applications
+## 3. Know how to scale applications
 
 ### Question: Scale the deployment web-app to 6 pods
 ### kubectl config use-context k8s-c1-H
