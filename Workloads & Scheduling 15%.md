@@ -340,7 +340,9 @@ default       web-app-66f7dd595-cb8mn                       1/1     Running   0 
 kube-system   calico-kube-controllers-798cc86c47-2bcq4      1/1     Running   5 (11h ago)    29d
 kube-system   kube-proxy-g8mq4                              1/1     Running   5 (10h ago)    29d
 default       cpu-pod1                                      1/1     Running   1 (11h ago)    22h
+
 [root@master1 ~]# echo "kubectl get pod -A --sort-by=.metadata.uid" > /var/log/find_pods_uid.sh
+
 [root@master1 ~]# sh /var/log/find_pods_uid.sh
 NAMESPACE     NAME                                          READY   STATUS    RESTARTS       AGE
 kube-system   kube-proxy-q9gtm                              1/1     Running   5 (11h ago)    29d
@@ -377,7 +379,7 @@ default       cpu-pod1                                      1/1     Running   1 
 
 If you want to see the UID of pods then you need to specify the custom column.
 
-[root@master1 ~]# kubectl get pods -A -o custom-columns=PodName:.metadata.name,PodUID:.metadata.uid --sort-by=.metadata.uid
+[a@master1 ~]# kubectl get pods -A -o custom-columns=PodName:.metadata.name,PodUID:.metadata.uid --sort-by=.metadata.uid
 PodName                                       PodUID
 kube-proxy-q9gtm                              2a9d3417-06e9-41d9-b3c0-1f91a513743e
 web-app-66f7dd595-pm6vh                       2ae2e338-8011-4210-958d-6313f2a6cc51
