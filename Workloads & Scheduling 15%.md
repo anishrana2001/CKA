@@ -84,6 +84,52 @@ kubectl describe deployments.apps web-prod-268 | grep -i "Image:"
     Image:        nginx:1.17
 [root@master1 ~]#
 ```
-### Congratulation!! You have completed the question sucessfully.
+### Congratulation!! You have completed the question successfully.
 
 
+### 3. Know how to scale applications
+
+### Question: Scale the deployment web-app to 6 pods
+### kubectl config use-context k8s-c1-H
+
+### Solution: First, we should check where this Deployment is running. In the question, no namespace is defined. Thus, this deployment must be running on default namespace under user-context k8s-c1-H.
+
+```
+kubectl config use-context k8s-c1-H
+```
+### Check the deployment and identify how many replicas are defined, it means how many pods are there.
+```
+kubectl get deployments.apps web-app
+```
+
+### For references, my deployment has only 2 replicas.
+```
+[root@master1 ~]# kubectl get deployments.apps web-app 
+NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+web-app   2/2     2            2           54s
+```
+
+Now, we can update the existing deployment "" to replicas 6
+```
+kubectl scale deployment web-app --replicas=6
+```
+### For references
+```
+[root@master1 ~]# kubectl get deployments.apps web-app 
+NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+web-app   6/6     6            6           2m54s
+
+Or you can use get sub-command.
+
+[root@master1 ~]# kubectl get deployments.apps web-app -o yaml | grep -i replicas
+  replicas: 6    >>>>>>>>>>>>>>>>>>>>
+  availableReplicas: 6
+    message: ReplicaSet "web-app-66f7dd595" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    reason: MinimumReplicasAvailable
+  readyReplicas: 6
+  replicas: 6
+  updatedReplicas: 6
+[root@master1 ~]# 
+```
+### Congratulation!! You have completed the question successfully.
