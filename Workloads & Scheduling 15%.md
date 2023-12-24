@@ -193,6 +193,9 @@ pod/oodb-0   1/1     Running   0          8s
 pod/oodb-1   1/1     Running   0          6s
 pod/oodb-2   1/1     Running   0          5s
 
+NAME                    READY   AGE
+statefulset.apps/oodb   3/3     8s
+
 ```
 
 ### Now, it is clear that these pods are belongs to statefulsets. To fulfil the task we simply run:
