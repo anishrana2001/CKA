@@ -21,3 +21,68 @@ Workloads & Scheduling 15%
 kubectl create deployment web-prod-268 --image=nginx:1.16
 ```
 
+### We can check the rollout history of this deployment.
+```
+kubectl rollout history deployment web-prod-268
+```
+
+## For reference purpose:
+```
+[root@master1 ~]# kubectl rollout history deployment web-prod-268 
+deployment.apps/web-prod-268 
+REVISION  CHANGE-CAUSE
+1         <none>
+```
+
+### In question, it is asked us to upgrade the deployment and use new image "1.17". For  upgrade we can use "set image" sub-command. For record the upgrade, we can use option "--record"
+### Syntax of command would be "kubectl set image deployment deployment_name containername=newimagename --record"
+### How to find the container name? , we can use describe command. 
+
+```
+[root@master1 ~]# kubectl get deployments.apps web-prod-268 -o yaml | grep -A 10 container 
+      containers:
+      - image: nginx:1.17
+        imagePullPolicy: IfNotPresent
+        name: nginx    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+[root@master1 ~]#
+```
+
+```
+kubectl set image deployment web-prod-268 nginx=nginx:1.17 --record
+```
+
+### It's time for post checks. Again, execute the rollout history command to see the output.
+```
+kubectl rollout history deployment web-prod-268
+```
+## For reference purpose:
+```
+[root@master1 ~]# kubectl rollout history deployment web-prod-268 
+deployment.apps/web-prod-268 
+REVISION  CHANGE-CAUSE
+1         <none>
+2         kubectl set image deployment web-prod-268 nginx=nginx:1.17 --record=true
+```
+
+### Also, we should check the image version.
+
+```
+kubectl describe deployments.apps web-prod-268 | grep -i "Image:"
+```
+
+## For reference purpose:
+```
+[root@master1 ~]# kubectl describe deployments.apps web-prod-268 | grep -i "Image:"
+    Image:        nginx:1.17
+[root@master1 ~]#
+```
+
+
+
