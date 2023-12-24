@@ -140,11 +140,11 @@ Or you can use get sub-command.
 
 ## 5. Understand how resource limits can affect Pod scheduling
 
-### Question: ### Use context: kubectl config use-context k8s-c1-s
+### Question: Use context: kubectl config use-context k8s-c1-s
 ### Schedule a pod as follows:
-### · Name: nginx-kusc00401
-### · Image: nginx
-### · Node selector: disktype=ssd
+###    · Name: nginx-kusc00401
+###    · Image: nginx
+###    · Node selector: disktype=ssd
 ### Solution: In this question, it is asked us to use nodeselector parameter.
 
 ### Use the correct context.
