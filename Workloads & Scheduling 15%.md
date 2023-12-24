@@ -138,6 +138,90 @@ Or you can use get sub-command.
 
 ## 4. Understand the primitives used to create robust, self-healing, application deployments
 
+## 5. Understand how resource limits can affect Pod scheduling
+
+### Question: ### Use context: kubectl config use-context k8s-c1-s
+### Schedule a pod as follows:
+### · Name: nginx-kusc00401
+### · Image: nginx
+### · Node selector: disktype=ssd
+### Solution: In this question, it is asked us to use nodeselector parameter.
+
+### Use the correct context.
+```
+kubectl config use-context k8s-c1-s
+```
+
+### Open the URL : https://kubernetes.io
+### Click on Documentation
+### Search "nodeSelector disktype"  This is what given in the question. See the below print screen.
+
+![image](https://github.com/anishrana2001/CKA/assets/93471182/afcd9177-deb2-4536-831f-7bc78acbd37a)
+
+copy the below yaml into one file disktype.yaml
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-kusc00401              #updated
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    disktype: ssd
+```
+```
+kubectl apply -f disktype.yaml
+```
+
+### Post checks / How to verify it ? / Pod must be in running state.
+```
+kubectl get pods nginx-kusc00401 -o wide
+```
+
+### For your references.
+```
+First check the label of nodes
+[root@master1 ~]# kubectl describe nodes workernode1.example.com | grep -i -A 2 label
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    disktype=ssd
+
+[root@master1 ~]# kubectl apply -f disktype.yaml 
+pod/nginx-kusc00401 created
+
+[root@master1 ~]# kubectl get pods nginx-kusc00401 -o wide
+NAME              READY   STATUS    RESTARTS   AGE   IP               NODE                      NOMINATED NODE   READINESS GATES
+nginx-kusc00401   1/1     Running   0          26s   172.16.133.157   workernode1.example.com   <none>           <none>
+[root@master1 ~]#
+
+------------------------------------------------------------------------------------
+How to add the lable on nodes.
+[root@master1 ~]# kubectl label nodes workernode1.example.com disktype=ssd
+node/workernode1.example.com labeled
+
+How to check the lables.
+[root@master1 ~]# kubectl describe nodes workernode1.example.com | grep -i -A 6 label
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    disktype=ssd
+
+How to remove the lables.
+[root@master1 ~]# kubectl label nodes workernode1.example.com disktype-
+node/workernode1.example.com unlabeled
+[root@master1 ~]# 
+---------------------------------------------------------------------------------------
+```
+
+
+
+
+
+
 
 
 ## 6. Awareness of manifest management and common templating tools
