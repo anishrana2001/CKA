@@ -224,11 +224,11 @@ statefulset.apps/oodb   1/1     3m46s
 ```
 ### Congratulation!! You have completed the question successfully.
 
-##### 
-##### 
-##### 
+## 
+## 
+## 
 
-### Use context: kubectl config use-context k8s-c1-t
+### Qeustion:  Use context: kubectl config use-context k8s-c1-t
 ### There are numbers of pods in all namespaces. Write a command into /var/log/find_pods_age.sh which lists all Pods sorted by their AGE (metadata.creationTimestamp).
 ### Write a second command into /var/log/find_pods_uid.sh which lists all Pods sorted by field metadata.uid. Use kubectl sorting for both commands.
 ### Solution: If you not remember the command then you may refer the kubernetes.io website and search for cheetsheet.
