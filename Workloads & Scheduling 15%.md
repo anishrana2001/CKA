@@ -109,7 +109,7 @@ NAME      READY   UP-TO-DATE   AVAILABLE   AGE
 web-app   2/2     2            2           54s
 ```
 
-Now, we can update the existing deployment "" to replicas 6
+Now, we can update the existing deployment "web-app" to replicas 6
 ```
 kubectl scale deployment web-app --replicas=6
 ```
