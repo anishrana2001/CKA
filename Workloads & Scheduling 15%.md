@@ -235,12 +235,15 @@ Taints:             node-role.kubernetes.io/control-plane:NoSchedule
 ```
 ### From the above output, we get the know that key=node-role.kubernetes.io/control-plane, value is not defined and effect = NoSchedule
 
-### After that we need to create a pod "prod-regis" with toleration. However, Kubernetes schedular can create this pod on other nodes too.
+### After that we need to create a pod "prod-regis" with toleration. However, Kubernetes scheduler can create this pod on other nodes too.
 ### Thus, we need to add nodeselector option too on pod template.
 
 ### Open the URL : https://kubernetes.io
 ### Click on Documentation
 ### Search "taint and toleration" open the first URL and look for pod template file with toleration option. Modify the yaml file as per question requirement.
+### Link below:
+![image](https://github.com/anishrana2001/CKA/assets/93471182/e0f0e049-9411-4c90-b8be-8dad41a994c0)
+
 
 ```yaml
 cat <<EOF>> selector.yaml
