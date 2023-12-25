@@ -6,11 +6,11 @@
 ##  5. Perform a version upgrade on a Kubernetes cluster using Kubeadm
 ##  6. Implement etcd backup and restore 
 
-### 
-###
+###   
+###     
 
 ## 5. Perform a version upgrade on a Kubernetes cluster using Kubeadm
-### 
+###                 
 ### Question: Given an existing kubernetes cluster running version 1.26.9, upgrade all of the Kubernetes control plan and node components on the master node only to version 1.27.6. You are also expected to upgrade kubelet and kubectl on the master node.
 
 
