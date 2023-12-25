@@ -279,7 +279,8 @@ NAME         READY   STATUS    RESTARTS   AGE   IP             NODE             
 prod-regis   1/1     Running   0          15s   172.16.68.23   master1.example.com   <none>           <none>
 ```
 
-
+### If you want to learn from basic to advance on Taints and Toleration topic then  you may watch my taint video.
+[What is taints and toleration in Kubernetes](https://youtu.be/M30JDboJmg4)  
 
 
 ## 6. Awareness of manifest management and common templating tools
