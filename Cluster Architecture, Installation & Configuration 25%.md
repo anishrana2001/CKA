@@ -8,7 +8,7 @@
 
 ###                                                                                                                                                   .
 ###                                                                                                                                                   .
-
+##  1. Manage role based access control (RBAC)
 ###  Question 1:  Use context: kubectl config use-context k8s-c1-H
 ###  You have been asked to create a new ClusterRole for a deployment pipeline and bind it to a specific ServiceAccount scoped to a specific namespace.
 ###  Task -
