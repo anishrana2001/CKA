@@ -1,13 +1,12 @@
-## Qestion 4: Reconfigure the existing deployment front-end-var and add a port specifiction named http exposing port 80/tcp of the existing container nginx. 
+## Qestion 4: Reconfigure the existing deployment front-end-var and add a port specification named http exposing port 80/tcp of the existing container nginx. 
 ## Create a new service named front-end-var-svc-var exposing the container port http.
 ## Configure the new service to also expose individual Pods via a NodePort on the nodes on which they are scheduled.
 
 
 
 ### Solution: 
-### What we have, deployment name "front-end-var", whcih is already running.
-### What is asked us, expose this deployment on port 80, protocol TCP. 
-### Then, ask to bind the NodePort service "front-end-var-svc-var" to this deployment. 
+### What we have, deployment name "front-end-var", which is already running.
+### What is asked us, expose this deployment to new service "front-end-app-svc" on NodePort service on port 80.
 
 ```
 kubectl expose deployment front-end-var --name=front-end-var-svc-var --port=80 --target-port=80 --protocol=TCP --type=NodePort
