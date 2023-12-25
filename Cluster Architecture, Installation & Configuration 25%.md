@@ -119,7 +119,7 @@ clientVersion:
 ```
 [root@master1 data]# kubeadm upgrade apply v1.27.6
 ```
-### Once the kubeadm is upgraded, then we need to ugprade the kubelet and kubectl. We can upgrade both components in a single command.
+### Once the kubeadm is upgraded, then we need to upgrade the kubelet and kubectl. We can upgrade both components in a single command.
 ```
 [root@master1 data]# yum install -y kubelet-1.27.6 kubectl-1.27.6 --disableexcludes=kubernetes
 ```
