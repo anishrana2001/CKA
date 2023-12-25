@@ -138,7 +138,8 @@ workernode1.example.com   Ready    <none>          382d   v1.26.9
 workernode2.example.com   Ready    <none>          382d   v1.26.9
 ```
 
-
+### 🚴
+### 🏉
 ##  6. Implement etcd backup and restore 
 
 ### Question : First, create a snapshot of the existing etcd instance running at https://127.0.0.1:2379, saving the snapshot to /var/lib/etcd-snapshot123.db
