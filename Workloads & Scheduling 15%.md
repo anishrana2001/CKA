@@ -217,9 +217,62 @@ node/workernode1.example.com unlabeled
 ---------------------------------------------------------------------------------------
 ```
 
+### Question 2: Schedule Pod on Master Node after that create Pod prod-regis, which can only be scheduled on a master node do not add new labels on any nodes. 
+### Use context: kubectl config use-context k8s-c1-s
 
+### Solution: Here we need to add the toleration for running on master nodes, but also the nodeSelector to make sure it only runs on master nodes. If we only specify a toleration the Pod can be scheduled on master or worker nodes. 
 
+### First, we need to check the taint on master node. 
 
+```
+[root@master1 ~]# kubectl describe nodes master1.example.com | egrep -i taint
+Taints:             node-role.kubernetes.io/control-plane:NoSchedule
+```
+### From the above output, we get the know that key=node-role.kubernetes.io/control-plane, value is not defined and effect = NoSchedule
+
+### After that we need to create a pod "prod-regis" with toleration. However, Kubernetes schedular can create this pod on other nodes too.
+### Thus, we need to add nodeselector option too on pod template.
+
+### Open the URL : https://kubernetes.io
+### Click on Documentation
+### Search "taint and toleration" open the first URL and look for pod template file with toleration option. Modify the yaml file as per question requirement.
+
+```yaml
+cat <<EOF>> selector.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: prod-regis                                    # modified
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  tolerations:
+  - key: "node-role.kubernetes.io/control-plane"      # modified
+    effect: "NoSchedule" 
+  nodeSelector:                                       # Added
+    node-role.kubernetes.io/control-plane: ""         # Added
+EOF
+```
+### In the above yaml file, I have added the nodeselector line. Indentation of nodeselector is same as for toleration. In the next line just add the master node key and value must be blank.
+
+```
+kubectl apply -f selector.yaml 
+```
+###  Post check:  Check if our newly created pod "prod-regis" must be running on master node.
+```
+
+kubectl get pods prod-regis -o wide
+```
+### For your references.
+```
+[root@master1 ~]# kubectl get pods prod-regis -o wide
+NAME         READY   STATUS    RESTARTS   AGE   IP             NODE                  NOMINATED NODE   READINESS GATES
+prod-regis   1/1     Running   0          15s   172.16.68.23   master1.example.com   <none>           <none>
+```
 
 
 
