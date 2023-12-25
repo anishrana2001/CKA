@@ -222,6 +222,11 @@ node/workernode1.example.com unlabeled
 
 ### Solution: Here we need to add the toleration for running on master nodes, but also the nodeSelector to make sure it only runs on master nodes. If we only specify a toleration the Pod can be scheduled on master or worker nodes. 
 
+### Select the correct context.
+```
+kubectl config use-context k8s-c1-s
+```
+
 ### First, we need to check the taint on master node. 
 
 ```
