@@ -6,11 +6,11 @@
 ##  5. Perform a version upgrade on a Kubernetes cluster using Kubeadm
 ##  6. Implement etcd backup and restore 
 
-###   
-###     
+###                                                                                                                                                   .
+###                                                                                                                                                   .
 
 ## 5. Perform a version upgrade on a Kubernetes cluster using Kubeadm
-###                 
+###                                                                                                                                                   .
 ### Question: Given an existing kubernetes cluster running version 1.26.9, upgrade all of the Kubernetes control plan and node components on the master node only to version 1.27.6. You are also expected to upgrade kubelet and kubectl on the master node.
 
 
@@ -137,3 +137,49 @@ master1.example.com       Ready    control-plane   382d   v1.27.6  >>>>>>>>> Its
 workernode1.example.com   Ready    <none>          382d   v1.26.9
 workernode2.example.com   Ready    <none>          382d   v1.26.9
 ```
+
+
+##  6. Implement etcd backup and restore 
+
+### Question : First, create a snapshot of the existing etcd instance running at https://127.0.0.1:2379, saving the snapshot to /var/lib/etcd-snapshot123.db
+### After that, you need to restore an existing / previous snapshot located at /var/lib/etcd-snapshot-previous.db.
+
+
+### solution: 
+### First, we need to identify the etcd pods. Below command we can use.
+```
+kubectl -n kube-system get pod | grep etcd
+```
+### Now, we need to identify the CA Cert, Cert and Server key. Below command, we can use. 
+```
+kubectl -n kube-system describe pod etcd-master1.example.com
+```
+### Once, we have all details, we can take the snapshot. 
+```
+etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key snapshot save  /var/lib/etcd-snapshot123.db 
+```
+
+### We can also verify the new file. 
+```
+ls -l /opt/etcd-backup.db
+```
+### How to restore from backup file (/var/lib/from-backup) ?
+
+### Restore the backup in "/var/lib/from-backup" directory. Make sure to use sudo before running command otherwise it will throw permission issue
+
+```
+sudo etcdctl snapshot restore --data-dir /var/lib/from-backup  /var/lib/etcd-snapshot-previous.db
+```
+### Or we can use below command.
+```
+sudo etcdctl snapshot restore --data-dir /var/lib/from-backup  --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key /var/lib/etcd-snapshot-previous.db
+```
+```
+sudo chown -R etcd:etcd /var/lib/etcd
+```
+```
+sudo systemctl start etcd
+```
+ 
+
+## All explanation is being done on this video : https://youtu.be/0gkKak8ERQM
