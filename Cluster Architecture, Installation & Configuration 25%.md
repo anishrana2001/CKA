@@ -1,20 +1,24 @@
 # Cluster Architecture, Installation & Configuration 25%
-##   Manage role based access control (RBAC)
-##     Use Kubeadm to install a basic cluster
-##     Manage a highly-available Kubernetes cluster
-##     Provision underlying infrastructure to deploy a Kubernetes cluster
-##     Perform a version upgrade on a Kubernetes cluster using Kubeadm
-##     Implement etcd backup and restore 
+##  1. Manage role based access control (RBAC)
+##  2. Use Kubeadm to install a basic cluster
+##  3. Manage a highly-available Kubernetes cluster
+##  4. Provision underlying infrastructure to deploy a Kubernetes cluster
+##  5. Perform a version upgrade on a Kubernetes cluster using Kubeadm
+##  6. Implement etcd backup and restore 
 
-## Perform a version upgrade on a Kubernetes cluster using Kubeadm
+### 
+###
+
+## 5. Perform a version upgrade on a Kubernetes cluster using Kubeadm
+### 
 ### Question: Given an existing kubernetes cluster running version 1.26.9, upgrade all of the Kubernetes control plan and node components on the master node only to version 1.27.6. You are also expected to upgrade kubelet and kubectl on the master node.
 
-### Check the curent version.
 
-### Open the "Kubernetes.io" page and Click on "Documentation" on the left hand side then search "kubeadm upgrade". Open the first link and click on tab as per your Operating System.
+### Open the "Kubernetes.io" page and Click on "Documentation" at the middle of the page and then search "kubeadm upgrade" at the left hand side of the page. Open the first link and click on tab as per your Operating System (OS). My OS is CentOS, so I am following CentOS tab. In exam, it would be Ubuntu or Debian
 
 ![image](https://github.com/anishrana2001/CKA/assets/93471182/19fde512-e86b-49fa-b4d3-5b9b11ef8ef3)
 
+### Check the curent version.
 ```
 [root@master1 ~]# kubectl get nodes
 NAME                      STATUS   ROLES           AGE    VERSION
