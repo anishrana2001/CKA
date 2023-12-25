@@ -9,6 +9,89 @@
 ###                                                                                                                                                   .
 ###                                                                                                                                                   .
 
+###  Question 1:  Use context: kubectl config use-context k8s-c1-H
+###  You have been asked to create a new ClusterRole for a deployment pipeline and bind it to a specific ServiceAccount scoped to a specific namespace.
+###  Task -
+###  Create a new ClusterRole named deployment-clusterrole-var, which only allows to create the following resource types:
+###  - Deployment
+###  - Stateful Set
+###  - DaemonSet
+###  Create a new ServiceAccount named cicd-token-var in the existing namespace app-team-var.
+###  Bind new ClusterRole deployment-clusterrole-var to the new ServiceAccount cicd-token-var, limited to the namespace app-team-var.
+###  Solution: What we have given in the question?
+###  ClusterRole name = deployment-clusterrole-var
+###  ServiceAccount name = cicd-token-var
+###  namespace = app-team-var
+###  verb= create
+###  resources= Deployment,StatefulSet,DaemonSet
+###  What we need to create, clusterrole, serviceaccount, and roleBinding.
+###   .
+###  Solution 
+###   Remember : ClusterRole and clusterrolebinding are not a namespaced object. But in question it is asked us "Bind new ClusterRole deployment-clusterrole-var to the new ServiceAccount cicd-token-var, limited to the namespace app-team-var."
+ 
+###  It means that we need to create a ClusterRole and bind this ClusterRole with Rolebinding because rolebinding is a namespaced object.
+ 
+ 
+###  Change the context
+```
+kubectl config use-context k8s-c1-H
+```
+
+###  Create a ClusterRole which should have verbs "create" and resources must be "Deployment,StatefulSet,DaemonSet"
+```
+kubectl create clusterrole deployment-clusterrole-var --verb=create --resource=Deployment,StatefulSet,DaemonSet
+```
+###  Once we created ClusterRole, we can create system serviceaccount under namespace "app-team-var"
+```
+kubectl create serviceaccount cicd-token-var -n app-team-var
+```
+###  So far, we created clusterrole and serviceaccount. Now, we can create rolebinding. Please note the serviceaccount syntax "--serviceaccount=namespace:serviceaccount-name" and don't forget to add namespace  because rolebinding is a namespaced object.
+```
+kubectl create rolebinding deploy-b --clusterrole=deployment-clusterrole-var --serviceaccount=app-team-var:cici-token --namespace=app-team-var 
+```
+ 
+
+###   How we can verify it? 
+### Let's check, if system user can create deployment under namespace app-team-var. The answer should be yes.  
+```
+kubectl auth can-i create  Deployment --as system:serviceaccount:app-team-var:cici-token --namespace=app-team-var
+```
+### For your references.
+```
+[root@master1 ~]# kubectl describe clusterrole deployment-clusterrole-var
+Name:         deployment-clusterrole-var
+Labels:       <none>
+Annotations:  <none>
+PolicyRule:
+  Resources          Non-Resource URLs  Resource Names  Verbs
+  ---------          -----------------  --------------  -----
+  daemonsets.apps    []                 []              [create]
+  deployments.apps   []                 []              [create]
+  statefulsets.apps  []                 []              [create]
+ 
+[root@master1 ~]# kubectl -n app-team-var describe rolebindings.rbac.authorization.k8s.io deploy-b
+Name:         deploy-b
+Labels:       <none>
+Annotations:  <none>
+Role:
+  Kind:  ClusterRole
+  Name:  deployment-clusterrole-var
+Subjects:
+  Kind            Name        Namespace
+  ----            ----        ---------
+  ServiceAccount  cici-token  app-team-var
+[root@master1 ~]#
+ 
+[root@master1 ~]# kubectl auth can-i create  Deployment --as system:serviceaccount:app-team-var:cici-token --namespace=app-team-var
+yes
+
+You should see "Yes" in your output.
+```
+
+##  Detailed information is being shared on this video : https://youtu.be/_MmrGe1_l3c
+ 
+ 
+
 ## 5. Perform a version upgrade on a Kubernetes cluster using Kubeadm
 ###                                                                                                                                                   .
 ### Question: Given an existing kubernetes cluster running version 1.26.9, upgrade all of the Kubernetes control plan and node components on the master node only to version 1.27.6. You are also expected to upgrade kubelet and kubectl on the master node.
