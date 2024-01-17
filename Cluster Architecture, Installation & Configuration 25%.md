@@ -259,10 +259,10 @@ sudo etcdctl snapshot restore --data-dir /var/lib/from-backup  /var/lib/etcd-sna
 sudo etcdctl snapshot restore --data-dir /var/lib/from-backup  --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key /var/lib/etcd-snapshot-previous.db
 ```
 ```
-sudo chown -R etcd:etcd /var/lib/etcd
+sudo chown -R etcd:etcd /var/lib/from-backup
 ```
 ```
-sudo systemctl start etcd
+sudo systemctl restart etcd
 ```
  
 
