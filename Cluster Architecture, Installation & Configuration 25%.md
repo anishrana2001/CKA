@@ -245,7 +245,7 @@ etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.
 
 ### We can also verify the new file. 
 ```
-ls -l /opt/etcd-backup.db
+ls -l  /var/lib/etcd-snapshot123.db 
 ```
 ### How to restore from backup file (/var/lib/from-backup) ?
 
