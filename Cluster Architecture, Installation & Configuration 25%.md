@@ -262,7 +262,7 @@ sudo etcdctl snapshot restore --data-dir /var/lib/from-backup  --endpoints=https
 sudo chown -R etcd:etcd /var/lib/from-backup
 ```
 ```
-sudo systemctl restart etcd
+sudo systemctl start etcd
 ```
  
 
