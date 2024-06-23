@@ -135,21 +135,27 @@ kubectl -n kube-system describe pod etcd-master1.example.com
 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key snapshot save  /var/lib/etcd-snapshot.db
 
 ```
-```
-ls -l /opt/etcd-backup.db
+
+### How to restore from backup file (/var/lib/etcd-snapshot-previous.db) ?
+
+Before, restoring the etcd snapshot, it is worth to check the current etcd dir....
 
 ```
+kubectl -n kube-system get pod etcd-master1.example.com | grep -i "data-dir"
 ```
-sudo chown -R etcd:etcd  /var/lib/etcd-snapshot.db
-```
+### Let's assume that it is "/var/lib/etcd"
 
 ```
-### How to restore from backup file (/var/lib/from-backup) ?
+etcdctl snapshot restore --data-dir /var/lib/from-backup /var/lib/etcd-snapshot-previous.db
+```
+### Once you restore the snapshot, you will observe new directory "/var/lib/from-backup"created. Now, you need to give a right permission. We can check the old etcd directory.
 
 ```
+ls -l /var/lib/etcd
 ```
-etcdctl snapshot restore --data-dir /var/lib/from-backup  /opt/etcd-backup.db 
-
+### Give the same rights.
+```
+sudo chown -R etcd:etcd  /var/lib/from-backup
 ```
 
 All explanation is being done on this video : https://youtu.be/0gkKak8ERQM
