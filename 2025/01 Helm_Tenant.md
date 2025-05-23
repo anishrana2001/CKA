@@ -160,6 +160,8 @@ minio-operator-67677d7db8-fv9nm   0/1     ErrImagePull   0          28s
 [root@master1 ~]# 
 
 [root@master1 ~]# vi /data/lab/1/minio/tenant.yaml
+![image](https://github.com/user-attachments/assets/7a4a671e-6919-473b-9248-92511e6bcf0b)
+
 [root@master1 ~]# kubectl apply -f /data/lab/1/minio/tenant.yaml 
 tenant.minio.min.io/myminio created
 [root@master1 ~]# kubectl -n minio get tenants.minio.min.io 
