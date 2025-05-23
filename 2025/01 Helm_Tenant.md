@@ -15,8 +15,8 @@ kubectl apply -f https://raw.githubusercontent.com/anishrana2001/CKA/refs/heads/
 ## Please make sure, helm is installed.
 
 #  Question: Solve this question on: ssh cka4628
-
-- 1. Create namespace `minio`
+## Your tasks are:
+- 1. You need to create a namespace called `minio`
 - 2. Install Helm chart `minio/operator` in the `minio` namespace. The Helm Release should be called `minio-operator`
 - 3. Update the Tenant resource in `/data/lab/1/minio/tenant.yaml` to include `enableSFTP: true` under `features`.
 - 4. Create the Tenant resource from `/data/lab/1/minio/tenant.yaml`
