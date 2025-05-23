@@ -9,7 +9,7 @@ chmod 700 get_helm.sh
 ./get_helm.sh
 helm completion bash > /etc/bash_completion.d/helm
 /usr/local/bin/helm repo add minio https://operator.min.io/
-kubectl apply -f https://raw.githubusercontent.com/anishrana2001/CKA/refs/heads/main/2025/helm-tenant.yaml
+curl -o /data/lab/1/minio/tenant.yaml https://raw.githubusercontent.com/anishrana2001/CKA/refs/heads/main/2025/helm-tenant.yaml
 ```
 
 ## Please make sure, helm is installed.
