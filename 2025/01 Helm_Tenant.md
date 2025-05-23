@@ -90,8 +90,24 @@ kubectl -n minio get tenants.minio.min.io
 
 
 
+
+
+## How to remove the lab ?
+- First, we will delete the Tenant.
+- Second, we will uninstall the release.
+- In last, we will remove the repo
+```
+kubectl delete -f  https://raw.githubusercontent.com/anishrana2001/CKA/refs/heads/main/2025/helm-tenant.yaml
+helm uninstall minio-operator -n minio 
+helm repo remove minio
+```
+
+
+
+
 ### For your references.
 ```
+
 [root@master1 ~]# helm repo list
 NAME    URL                     
 minio   https://operator.min.io/
@@ -130,5 +146,36 @@ myminio                    14s
 [root@master1 ~]# 
 
 
+[root@master1 data]# kubectl delete -f  https://raw.githubusercontent.com/anishrana2001/CKA/refs/heads/main/2025/helm-tenant.yaml
+tenant.minio.min.io "myminio" deleted
+[root@master1 data]#
+[root@master1 data]# kubectl -n minio get tenants.minio.min.io 
+error: the server doesn't have a resource type "tenants"
 
+[root@master1 ~]# helm -n minio ls
+NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
+minio-operator  minio           1               2025-05-23 11:28:36.238589736 +0530 IST deployed        operator-7.1.1  v7.1.1     
+[root@master1 ~]# helm uninstall minio-operator -n minio 
+release "minio-operator" uninstalled
+[root@master1 ~]# helm -n minio ls
+NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
+[root@master1 ~]# 
+
+
+[root@master1 ~]# helm search repo 
+NAME                    CHART VERSION   APP VERSION     DESCRIPTION                    
+minio/minio-operator    4.3.7           v4.3.7          A Helm chart for MinIO Operator
+minio/operator          7.1.1           v7.1.1          A Helm chart for MinIO Operator
+minio/tenant            7.1.1           v7.1.1          A Helm chart for MinIO Operator
+[root@master1 ~]# helm repo list 
+NAME    URL                     
+minio   https://operator.min.io/
+
+[root@master1 ~]# helm repo remove minio
+"minio" has been removed from your repositories
+[root@master1 ~]# helm repo list 
+Error: no repositories to show
+[root@master1 ~]# helm search repo 
+Error: no repositories configured
+[root@master1 ~]# 
 ```
