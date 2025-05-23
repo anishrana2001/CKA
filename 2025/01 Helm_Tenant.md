@@ -1,7 +1,5 @@
 
-
-
-### Prepare the lab for this question:
+# Prepare the lab for this question:
 ```
 mkdir -p /data/lab/1/minio
 cd /data
@@ -11,46 +9,7 @@ chmod 700 get_helm.sh
 ./get_helm.sh
 helm completion bash > /etc/bash_completion.d/helm
 /usr/local/bin/helm repo add minio https://operator.min.io/
-
-cat <<EOF>> /data/lab/1/minio/tenant.yaml
-apiVersion: minio.min.io/v2
-kind: Tenant
-metadata:
-  name: myminio
-  namespace: minio
-spec:
-  features:
-    bucketDNS: false
-  pools:
-    ## Servers specifies the number of MinIO Tenant Pods / Servers in this pool.
-    ## For standalone mode, supply 1. For distributed mode, supply 4 or more.
-    ## Note that the operator does not support upgrading from standalone to distributed mode.
-    - servers: 4
-      ## custom pool name
-      name: pool-0
-      ## volumesPerServer specifies the number of volumes attached per MinIO Tenant Pod / Server.
-      volumesPerServer: 2
-      ## This VolumeClaimTemplate is used across all the volumes provisioned for MinIO Tenant in this Pool.
-      volumeClaimTemplate:
-        metadata:
-          name: data
-        spec:
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 15Mi
-      containerSecurityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        runAsNonRoot: true
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop:
-            - ALL
-        seccompProfile:
-          type: RuntimeDefault
-EOF
+kubectl apply -f https://raw.githubusercontent.com/anishrana2001/CKA/refs/heads/main/2025/helm-tenant.yaml
 ```
 
 ## Please make sure, helm is installed.
