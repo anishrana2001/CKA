@@ -95,12 +95,13 @@ kubectl -n minio get tenants.minio.min.io
 ## How to remove the lab ?
 - First, we will delete the Tenant.
 - Second, we will uninstall the release.
-- In last, we will remove the repo
+- In last, we will remove the repo and delete the namespace
 ```
 kubectl delete -f  /data/lab/1/minio/tenant.yaml
 rm -rf /data/lab/1/minio/tenant.yaml 
 helm uninstall minio-operator -n minio 
 helm repo remove minio
+ kubectl delete namespaces minio
 ```
 
 
@@ -178,5 +179,8 @@ minio   https://operator.min.io/
 Error: no repositories to show
 [root@master1 ~]# helm search repo 
 Error: no repositories configured
-[root@master1 ~]# 
+
+[root@master1 data]# kubectl delete namespaces minio
+namespace "minio" deleted
+[root@master1 ~]#
 ```
