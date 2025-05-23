@@ -115,6 +115,7 @@ spec:
     enableSFTP: true                     ## ADD 👈👈👈
   image: quay.io/minio/minio:latest
 ```
+![image](https://github.com/user-attachments/assets/7a4a671e-6919-473b-9248-92511e6bcf0b)
 
 
 ### - 4. Create the Tenant resource from `/data/lab/1/minio/tenant.yaml`
@@ -153,6 +154,7 @@ TEST SUITE: None
 [root@master1 ~]# helm -n minio ls
 NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
 minio-operator  minio           1               2025-05-23 11:28:36.238589736 +0530 IST deployed        operator-7.1.1  v7.1.1     
+
 [root@master1 ~]# kubectl get pods -n minio 
 NAME                              READY   STATUS         RESTARTS   AGE
 minio-operator-67677d7db8-dtkjs   1/1     Running        0          28s
@@ -160,10 +162,9 @@ minio-operator-67677d7db8-fv9nm   0/1     ErrImagePull   0          28s
 [root@master1 ~]# 
 
 [root@master1 ~]# vi /data/lab/1/minio/tenant.yaml
-![image](https://github.com/user-attachments/assets/7a4a671e-6919-473b-9248-92511e6bcf0b)
-
 [root@master1 ~]# kubectl apply -f /data/lab/1/minio/tenant.yaml 
 tenant.minio.min.io/myminio created
+
 [root@master1 ~]# kubectl -n minio get tenants.minio.min.io 
 NAME      STATE   HEALTH   AGE
 myminio                    14s
