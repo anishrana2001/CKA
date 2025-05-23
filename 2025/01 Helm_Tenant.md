@@ -75,7 +75,11 @@ EOF
 ```
 kubectl create namespace minio
 ```
-
+### - 2. Install Helm chart `minio/operator` in the `minio` namespace. The Helm Release should be called `minio-operator`
+### From the above task, we get to know that 
+### - Helm chart name = `minio/operator`
+### - Helm release name = `minio-operator`
+### -n minio namespace 
 ### Identify the Repo name. You must observe one repo added. In my case repo name is `minio`
 ```
 helm repo list
@@ -85,10 +89,7 @@ helm repo list
 ```
 helm search repo
 ```
-### - 2. Install Helm chart `minio/operator` in the `minio` namespace. The Helm Release should be called `minio-operator`
-### - Helm chart name = `minio/operator`
-### - Helm release name = `minio-operator`
-### -n minio namespace 
+
 ```
 helm -n minio install minio-operator minio/operator
 ```
