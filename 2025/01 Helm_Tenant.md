@@ -79,7 +79,7 @@ kubectl create namespace minio
 ### From the above task, we get to know that 
 ### - Helm chart name = `minio/operator`
 ### - Helm release name = `minio-operator`
-### -n minio namespace 
+- we need to use `minio` namespace 
 ### Identify the Repo name. You must observe one repo added. In my case repo name is `minio`
 ```
 helm repo list
