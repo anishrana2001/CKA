@@ -101,7 +101,8 @@ kubectl delete -f  /data/lab/1/minio/tenant.yaml
 rm -rf /data/lab/1/minio/tenant.yaml 
 helm uninstall minio-operator -n minio 
 helm repo remove minio
- kubectl delete namespaces minio
+kubectl -n minio delete pods/$( kubectl -n minio get pods | awk '{print $1}' | grep -v NAME) --force --grace-period=0
+kubectl delete namespaces minio
 ```
 
 
@@ -179,6 +180,10 @@ minio   https://operator.min.io/
 Error: no repositories to show
 [root@master1 ~]# helm search repo 
 Error: no repositories configured
+
+[root@master1 data]# kubectl -n minio delete pods/$( kubectl -n minio get pods | awk '{print $1}' | grep -v NAME) --force --grace-period=0
+Warning: Immediate deletion does not wait for confirmation that the running resource has been terminated. The resource may continue to run on the cluster indefinitely.
+pod "minio-operator-67677d7db8-dtkjs" force deleted
 
 [root@master1 data]# kubectl delete namespaces minio
 namespace "minio" deleted
