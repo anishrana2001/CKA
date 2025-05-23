@@ -97,7 +97,8 @@ kubectl -n minio get tenants.minio.min.io
 - Second, we will uninstall the release.
 - In last, we will remove the repo
 ```
-kubectl delete -f  https://raw.githubusercontent.com/anishrana2001/CKA/refs/heads/main/2025/helm-tenant.yaml
+kubectl delete -f  /data/lab/1/minio/tenant.yaml
+rm -rf /data/lab/1/minio/tenant.yaml 
 helm uninstall minio-operator -n minio 
 helm repo remove minio
 ```
