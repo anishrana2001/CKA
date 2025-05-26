@@ -21,7 +21,7 @@ curl -o /data/lab/1/tiger/tenant.yaml https://raw.githubusercontent.com/anishran
 - 4. Create the Tenant resource from `/data/lab/1/tiger/tenant.yaml`
 --- 
 ## Solution: 
-### helm package is already installed & helm chart "minio/operator" is also installed.
+### helm command package is already installed & `minio repo` will also be added
 ### Note: 
 - Helm chart name = `minio/operator`
 - Helm release name = `minio-prod-operator`
