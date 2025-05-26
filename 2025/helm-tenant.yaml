@@ -2,7 +2,7 @@ apiVersion: minio.min.io/v2
 kind: Tenant
 metadata:
   name: myminio
-  namespace: minio
+  namespace: tiger
 spec:
   features:
     bucketDNS: false
