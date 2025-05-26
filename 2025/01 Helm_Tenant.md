@@ -110,5 +110,82 @@ kubectl delete namespaces tiger
 ### For your references.
 ```
 
-TO BE UPDATED
+
+[root@master1 ~]# kubectl get nodes
+NAME                      STATUS   ROLES           AGE    VERSION
+master1.example.com       Ready    control-plane   283d   v1.29.15
+workernode1.example.com   Ready    <none>          283d   v1.29.15
+workernode2.example.com   Ready    <none>          283d   v1.29.15
+[root@master1 ~]# mkdir -p /data/lab/1/tiger
+[root@master1 data]# /cd /data
+[root@master1 data]# /usr/local/bin/helm repo add minio https://operator.min.io/
+"minio" has been added to your repositories
+
+[root@master1 data]#
+[root@master1 data]# ssh cka4628
+
+[root@master1 data]#
+[root@master1 data]# kubectl create namespace tiger
+namespace/tiger created
+
+[root@master1 data]# helm repo list
+NAME    URL
+minio   https://operator.min.io/
+
+[root@master1 data]# helm search repo
+NAME                    CHART VERSION   APP VERSION     DESCRIPTION
+minio/minio-operator    4.3.7           v4.3.7          A Helm chart for MinIO Operator
+minio/operator          7.1.1           v7.1.1          A Helm chart for MinIO Operator
+minio/tenant            7.1.1           v7.1.1          A Helm chart for MinIO Operator
+[root@master1 data]# helm search repo | grep minio
+minio/minio-operator    4.3.7           v4.3.7          A Helm chart for MinIO Operator
+minio/operator          7.1.1           v7.1.1          A Helm chart for MinIO Operator
+minio/tenant            7.1.1           v7.1.1          A Helm chart for MinIO Operator
+
+[root@master1 data]# helm -n tiger install minio-prod-operator minio/operator
+NAME: minio-prod-operator
+LAST DEPLOYED: Mon May 26 23:03:50 2025
+NAMESPACE: tiger
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+
+[root@master1 data]# helm -n tiger ls
+NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS     CHART           APP VERSION
+minio-prod-operator     tiger           1               2025-05-26 23:03:50.340489177 +0530 IST deployed   operator-7.1.1  v7.1.1
+[root@master1 data]#
+
+[root@master1 data]# kubectl get pods -n tiger
+NAME                              READY   STATUS    RESTARTS   AGE
+minio-operator-766455fdcd-fnkqf   1/1     Running   0          50s
+minio-operator-766455fdcd-jqzcx   1/1     Running   0          50s
+
+[root@master1 data]# vi /data/lab/1/tiger/tenant.yaml
+
+
+[root@master1 data]# kubectl -n tiger get tenants.minio.min.io
+No resources found in tiger namespace.
+
+[root@master1 data]# kubectl apply -f /data/lab/1/tiger/tenant.yaml
+tenant.minio.min.io/myminio created
+
+[root@master1 data]# kubectl -n tiger get tenants.minio.min.io
+NAME      STATE   HEALTH   AGE
+myminio                    5s
+
+
+[root@master1 data]# kubectl delete -f  /data/lab/1/tiger/tenant.yaml
+rm -rf /data/lab/1/tiger/tenant.yaml
+helm uninstall minio-prod-operator -n tiger
+helm repo remove minio
+kubectl -n tiger delete pods/$( kubectl -n tiger get pods | awk '{print $1}' | grep -v NAME) --force --grace-period=0
+kubectl delete namespaces tiger
+tenant.minio.min.io "myminio" deleted
+release "minio-prod-operator" uninstalled
+"minio" has been removed from your repositories
+error: there is no need to specify a resource type as a separate argument when passing arguments in resource/name form (e.g. 'kubectl get resource/<resource_name>' instead of 'kubectl get resource resource/<resource_name>'
+namespace "tiger" deleted
+[root@master1 data]#
+
+
 ```
